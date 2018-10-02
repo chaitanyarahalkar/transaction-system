@@ -6,8 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Transaction,User
 from django.db import transaction,IntegrityError
 from django.contrib import messages
-
-
+import time 
 # Create your views here.
 def index(request):
 	return render(request,'app/index.html')
@@ -82,10 +81,16 @@ def add_money(request):
 		amount = float(request.POST.get("amount"))
 		try:
 			with transaction.atomic():
+				tx = Transaction()
+				tx.from_id,tx.to_id = request.user.username,request.user.username
+				tx.issuer_bank = "ICICI"
 				if pin == request.user.upi_pin:
 					#account = BankA.objects.get(bank_id=request.user.id)
 					updatebalance(request,amount)
+					tx.amount = amount
+					tx.txn_id = int(time.time())
 					request.user.save()
+					tx.save()
 					messages.info(request, 'Added {} to your wallet.'.format(amount))
 				else:
 					messages.warning(request,'Invalid PIN!')

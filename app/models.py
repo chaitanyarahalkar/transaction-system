@@ -13,11 +13,10 @@ import uuid
 
 
 class Transaction(models.Model):
-	paid_on = models.DateTimeField()
+	paid_on = models.DateTimeField(default=timezone.now)
 	from_id = models.CharField(max_length=20)
 	to_id = models.CharField(max_length=20)
-	txn_id = models.CharField(max_length=20)
-	upi_id = models.BigAutoField(primary_key=True)
+	txn_id = models.CharField(max_length=20,primary_key=True)
 	issuer_bank = models.CharField(max_length=20)
 	amount = models.FloatField(default=0)
 
@@ -39,10 +38,10 @@ class User(AbstractUser):
 		return self.username
 
 class TransactionAdmin(admin.ModelAdmin):
-	list_display = ('paid_on','from_id','to_id','txn_id','upi_id','issuer_bank','amount')
+	list_display = ('paid_on','from_id','to_id','txn_id','issuer_bank','amount')
 	empty_value_display = '-empty-'
 	list_filter = ('paid_on','issuer_bank')
-	#readonly_fields = ('paid_on','from_id','to_id','txn_id','upi_id','issuer_bank','amount')
+	readonly_fields = ('paid_on','from_id','to_id','txn_id','issuer_bank','amount')
 	search_fields = ['from_id','to_id']
 	actions = ['export_as_json','maximum','average']
 	change_list_template = 'change_list_graph.html'
