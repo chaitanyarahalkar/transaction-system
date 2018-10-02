@@ -1,0 +1,58 @@
+<<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <!-- <form method="POST">
+            
+        </form> -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+        <title>SCG Gateway</title>
+
+        <!-- <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">SCG Gateway</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
+        
+        <div class="container">
+            <div class="row">
+          <input type="submit" name="logout" value="logout" class="btn btn-primary" onclick="location.href='/logout'">
+            </div>
+        </div>
+
+        <div class="container">
+            <form method="POST" action="/transaction">
+                {% csrf_token %} 
+                UPI Id: <input type="text" name="toid" id="toid" autocomplete="on"><br>
+                Amount: <input type="text" name="amt" id="amt"><br>
+                UPI Password: <input type="password" name="password" id="password" maxlength="4">
+                <input type="submit" name="submit">
+            </form>
+        </div>
+        <footer>
+        <div class="container">
+            <p>Copyright © SCG Gateway. All Rights Reserved | Contact Us: +91 90000 00000</p>
+      </div>
+        </footer>
+    </body>
+
+</html>
