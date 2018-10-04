@@ -12,6 +12,7 @@ import uuid
 # Create your models here.
 
 
+
 class Transaction(models.Model):
 	paid_on = models.DateTimeField(default=timezone.now)
 	from_id = models.CharField(max_length=20)
@@ -36,6 +37,16 @@ class User(AbstractUser):
 
 	def __str__(self):
 		return self.username
+
+class Bank(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	balance = models.FloatField(default=1000.00)
+	bank = models.CharField(default='ICICI',max_length=10)
+
+	def __str__(self):
+		return self.user.username
+
+
 
 class TransactionAdmin(admin.ModelAdmin):
 	list_display = ('paid_on','from_id','to_id','txn_id','issuer_bank','amount')

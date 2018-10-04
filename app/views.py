@@ -3,13 +3,16 @@ from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
-from .models import Transaction,User
+from .models import Transaction,User,Bank
 from django.db import transaction,IntegrityError
 from django.contrib import messages
 import time 
+from django.views.decorators.http import require_POST
+
 # Create your views here.
 def index(request):
 	return render(request,'app/index.html')
+
 
 def register(request):
 	if request.method == 'POST':
@@ -22,6 +25,7 @@ def register(request):
 
 	return render(request,'app/signup.html',{'form':form})
 
+
 @login_required
 def profile(request):
 	if request.user.is_authenticated:
@@ -29,6 +33,7 @@ def profile(request):
 			request.session.set_expiry(10000)
 	return render(request, 'app/dashboard.html')
 
+@require_POST
 @login_required
 def update(request):
 	email = request.POST.get("email") 
@@ -42,15 +47,20 @@ def update(request):
 	messages.info(request, 'Your profile was updated.')
 	return redirect('/user/')
 
+
 @login_required
 def user(request):
 	return render(request,'app/user.html')
+
+
 
 @login_required
 def my_transaction(request):
 	if request.method == 'POST':
 		if user.is_active:
 			request.session.set_expiry(300)
+			if request.session.get_expiry_age() == 0:
+				render(request,'app/expired.html')
 			tx = Transaction()
 			upi_id = request.POST.get("toid")
 			try:
@@ -74,6 +84,18 @@ def transactions(request):
 def updatebalance(request,amount):
 	request.user.wallet_balance+=amount
 
+
+@transaction.atomic
+def getbalance(request):
+	account = Bank.objects.get(user=request.user)
+	return account
+
+@transaction.atomic 
+def updatebankbalance(account,amount):
+	account.balance-=amount
+	account.save()
+
+@require_POST
 @login_required
 def add_money(request):
 	if request.method == 'POST':
@@ -83,17 +105,23 @@ def add_money(request):
 			with transaction.atomic():
 				tx = Transaction()
 				tx.from_id,tx.to_id = request.user.username,request.user.username
-				tx.issuer_bank = "ICICI"
-				if pin == request.user.upi_pin:
-					#account = BankA.objects.get(bank_id=request.user.id)
-					updatebalance(request,amount)
-					tx.amount = amount
-					tx.txn_id = int(time.time())
-					request.user.save()
-					tx.save()
-					messages.info(request, 'Added {} to your wallet.'.format(amount))
+				account = getbalance(request)
+				balance,tx.issuer_bank = account.balance,account.bank
+				if balance > amount:
+					if pin == request.user.upi_pin:
+						updatebalance(request,amount)
+						updatebankbalance(account,amount)
+						tx.amount = amount
+						tx.txn_id = int(time.time())
+						request.user.save()
+						tx.save()
+						messages.info(request, 'Added {} to your wallet.'.format(amount))
+					else:
+						messages.warning(request,'Invalid PIN!')
 				else:
-					messages.warning(request,'Invalid PIN!')
+					messages.warning(request,'Insufficient balance in your bank account!')
+
+					
 		except IntegrityError:
 			messages.error(request,'Error in transaction performing!')
 
