@@ -46,13 +46,14 @@ class Bank(models.Model):
 
 	def __str__(self):
 		return self.account_number
+	class Meta:
+		verbose_name = 'Bank'
+		verbose_name_plural = 'Bank'
 
-	# def create_obj(user):
-	# 	account_number = ''.join(random.choices(string.digits, k=8))
-	# 	try:
-	# 		Bank.objects.create(account_number=account_number,user=user)
-	# 	except IntegrityError:
-	# 		create_obj()
+class BankAdmin(admin.ModelAdmin):
+	list_display = ('account_number','bank','balance','user')
+	readonly_fields = ('account_number','balance','user')
+	search_fields = ['account_number','bank']
 
 
 

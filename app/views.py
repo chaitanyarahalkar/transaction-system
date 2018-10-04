@@ -11,6 +11,9 @@ import random
 import string  
 from django.views.decorators.http import require_POST
 from django.db import IntegrityError
+from django.http import HttpResponse
+import csv
+
 
 # Create your views here.
 def index(request):
@@ -24,7 +27,7 @@ def createaccount(user):
 		account.user = user
 		account.save()
 	except IntegrityError:
-		createaccount()
+		createaccount(user)
 
 def register(request):
 	if request.method == 'POST':
@@ -72,7 +75,7 @@ def my_transaction(request):
 	if request.method == 'POST':
 		if user.is_active:
 			request.session.set_expiry(300)
-			if request.session.get_expiry_age() == 0:
+			if request.session.get_expiry_age() == 0: # need to add page 
 				render(request,'app/expired.html')
 			tx = Transaction()
 			upi_id = request.POST.get("toid")
@@ -90,8 +93,8 @@ def my_transaction(request):
 
 @login_required
 def transactions(request):
-	transactions = Transaction.objects.get(from_id=request.user.id)
-	return render(request,'app/transactions.html')
+	transactions = Transaction.objects.filter(from_id=request.user.username)
+	return render(request,'app/transactions.html',{'transactions':transactions})
 
 @transaction.atomic
 def updatebalance(request,amount):
@@ -143,3 +146,15 @@ def add_money(request):
 	return redirect('/profile/')
 
 
+@login_required
+def invoice(request):
+	transactions = Transaction.objects.filter(from_id=request.user.username)
+	response = HttpResponse(content_type='text/csv')
+	response['Content-Disposition'] = 'attachment; filename="invoice.csv"'
+
+	writer = csv.writer(response)
+	writer.writerow(['ID', 'To ID', 'Issuer Bank', 'Amount','Paid On'])
+	for t in transactions:
+		writer.writerow([t.txn_id,t.to_id,t.issuer_bank,t.amount,t.paid_on])
+
+	return response
