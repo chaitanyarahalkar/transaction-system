@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
-        <title>SCGPay</title>
-    </head>
-    <body>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}">
+    <title>SCGPay</title>
+</head>
+
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="/">SCGPay</a>
+        </button>
+        <a class="navbar-brand" href="/">SCGPay</a>
 
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="#contact"><ion-icon name="call"></ion-icon> Contact Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/register"><ion-icon name="person-add"></ion-icon> Sign Up</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/login"><ion-icon name="log-in"></ion-icon> Login</a>
-              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">
+                        <ion-icon name="call"></ion-icon> Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">
+                        <ion-icon name="person-add"></ion-icon> Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">
+                        <ion-icon name="log-in"></ion-icon> Login</a>
+                </li>
             </ul>
-            
-          </div>
-        </nav>
-        <div id="banner_image">
-        	<div class="container">
-        		<div class="banner_content">
-        			<H1>SCGPay</H1><br>
-					<p>The Most Trusted Payment Wallet</p>
-                    <br>
-        			<a href="/register" class="btn btn-danger btn-lg active">Sign Up For Free</a>
-        		</div>
-        	</div>
+
         </div>
-        <div id="below_banner">
-            <div class="container ">
-                <div class="row">
-                    <H1 class='mx-auto'">Sign up now.</H1>
+    </nav>
+    <div id="banner_image">
+        <div class="container">
+            <div class="banner_content">
+                <H1>SCGPay</H1>
+                <br>
+                <p>The Most Trusted Payment Wallet</p>
+                <br>
+                <a href="/register" class="btn btn-danger btn-lg active">Sign Up For Free</a>
+            </div>
+        </div>
+    </div>
+    <div id="below_banner">
+        <div class="container ">
+            <div class="row">
+                <H1 class='mx-auto' ">Sign up now.</H1>
                 </div>
-                <div class="row">
+                <div class="row ">
                     <h2 class='mx-auto'>It's quick, free and no cash needed in your account.</h2>
 
                 </div>
                 <hr>
-                <div class="row">
+                <div class="row ">
                     <div class="col-xs-12 col-sm-4 ">
                         <h2>1. Create your Account</h2>
                         <p>All you need is your email address and a password</p>
                     </div>
-                    <div class="col-xs-12 col-sm-4">
+                    <div class="col-xs-12 col-sm-4 ">
                         <h2>2.Tell us about yourself</h2>
                         <p>We just need your address and contact details.</p>
                     </div>
@@ -68,44 +72,43 @@
                 </div>  
             </div>
         </div>
-        <div id="contact" class="container-fluid bg-grey">
-          <h2 class="text-center">CONTACT US</h2>
-          <div class="row">
-            <div class="col-sm-5">
+        <div id="contact " class="container-fluid bg-grey ">
+          <h2 class="text-center ">CONTACT US</h2>
+          <div class="row ">
+            <div class="col-sm-5 ">
               <p>Contact us and we'll get back to you within 24 hours.</p>
-              <p><span class="glyphicon glyphicon-map-marker"></span> Pune, Maharashtra, India</p>
-              <p><span class="glyphicon glyphicon-phone"></span> +91 90000 00000</p>
-              <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+              <p><span class="glyphicon glyphicon-map-marker "></span> Pune, Maharashtra, India</p>
+              <p><span class="glyphicon glyphicon-phone "></span> +91 90000 00000</p>
+              <p><span class="glyphicon glyphicon-envelope "></span> myemail@something.com</p>
             </div>
-            <div class="col-sm-7 slideanim">
-              <div class="row">
-                <div class="col-sm-6 form-group">
-                  <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+            <div class="col-sm-7 slideanim ">
+              <div class="row ">
+                <div class="col-sm-6 form-group ">
+                  <input class="form-control " id="name " name="name " placeholder="Name " type="text " required>
                 </div>
-                <div class="col-sm-6 form-group">
-                  <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                <div class="col-sm-6 form-group ">
+                  <input class="form-control " id="email " name="email " placeholder="Email " type="email " required>
                 </div>
               </div>
-              <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-              <div class="row">
-                <div class="col-sm-12 form-group">
-                  <button class="btn btn-default pull-right" type="submit">Send</button>
+              <textarea class="form-control " id="comments " name="comments " placeholder="Comment " rows="5 "></textarea><br>
+              <div class="row ">
+                <div class="col-sm-12 form-group ">
+                  <button class="btn btn-default pull-right " type="submit ">Send</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="card text-center text-white bg-dark">
-			<div class="card-footer text-muted">
-    			Copyright © SCGPay. All Rights Reserved | Contact Us: +91 90000 00000
-  			</div>
-		</div>
+        <div class="card text-center text-white bg-dark ">
+      <div class="card-footer text-muted ">
+          Copyright © SCGPay. All Rights Reserved | Contact Us: +91 90000 00000
+        </div>
+    </div>
 
-
-		<script src="https://unpkg.com/ionicons@4.4.4/dist/ionicons.js"></script>
-     	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ionicons@4.4.4/dist/ionicons.js "></script>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 " crossorigin="anonymous "></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js " integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy " crossorigin="anonymous "></script>
     </body>
 </html>
