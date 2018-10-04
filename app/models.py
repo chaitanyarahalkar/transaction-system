@@ -42,9 +42,17 @@ class Bank(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	balance = models.FloatField(default=1000.00)
 	bank = models.CharField(default='ICICI',max_length=10)
+	account_number = models.CharField(max_length=20,primary_key=True)
 
 	def __str__(self):
-		return self.user.username
+		return self.account_number
+
+	# def create_obj(user):
+	# 	account_number = ''.join(random.choices(string.digits, k=8))
+	# 	try:
+	# 		Bank.objects.create(account_number=account_number,user=user)
+	# 	except IntegrityError:
+	# 		create_obj()
 
 
 
