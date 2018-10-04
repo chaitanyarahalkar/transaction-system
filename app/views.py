@@ -7,18 +7,30 @@ from .models import Transaction,User,Bank
 from django.db import transaction,IntegrityError
 from django.contrib import messages
 import time 
+import random
+import string  
 from django.views.decorators.http import require_POST
+from django.db import IntegrityError
 
 # Create your views here.
 def index(request):
 	return render(request,'app/index.html')
 
+def createaccount(user):
+	try:
+		account = Bank()
+		account.account_number = ''.join(random.choices(string.digits, k=20))
+		account.user = user
+		account.save()
+	except IntegrityError:
+		createaccount()
 
 def register(request):
 	if request.method == 'POST':
 		form = UserRegisterForm(request.POST)
 		if form.is_valid():
-			form.save()
+			user = form.save()
+			createaccount(user)
 			return render(request,'app/success.html')
 	else:
 		form = UserRegisterForm()
