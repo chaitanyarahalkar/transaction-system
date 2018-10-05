@@ -81,10 +81,14 @@ def update(request):
 	email = request.POST.get("email") 
 	address = request.POST.get("address")
 	city = request.POST.get("city")
+	fname = request.POST.get("fname")
+	lname = request.POST.get("lname")
 	entry = User.objects.get(email=email)
 	entry.email = email
 	entry.address = address
 	entry.city = city
+	entry.first_name = fname 
+	entry.last_name = lname
 	entry.save()
 	messages.info(request, 'Your profile was updated.')
 	return redirect('/user/')
