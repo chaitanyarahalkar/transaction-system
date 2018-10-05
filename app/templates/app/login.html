@@ -40,7 +40,8 @@
 
         <div class="container signup col-md-5">
             <form method="POST">
-                {% csrf_token %} {{ form|crispy }}
+                {% csrf_token %} 
+                {{ form|crispy }}
                 <p><a href="/password-reset">Forgot Password?</a></p>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

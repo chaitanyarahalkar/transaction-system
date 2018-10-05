@@ -3,7 +3,7 @@ from django.contrib import messages
 from .forms import UserRegisterForm
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
-from .models import Transaction,User,Bank
+from .models import Transaction,User,Bank,OTP 
 from django.db import transaction,IntegrityError
 from django.contrib import messages
 import time 
@@ -13,11 +13,34 @@ from django.views.decorators.http import require_POST
 from django.db import IntegrityError
 from django.http import HttpResponse
 import csv
-
+from django_otp.util import random_hex
+from .otp import TOTPVerification
 
 # Create your views here.
 def index(request):
 	return render(request,'app/index.html')
+
+
+@transaction.atomic
+def getiv(request):
+	return OTP.objects.get(user=request.user).iv 
+
+def sendotp(request):
+	otp = TOTPVerification(key=getiv(request))
+	print(otp.generate_token())
+	return otp 
+
+@login_required
+def verifyotp(request):
+	otp_obj = sendotp(request)
+	if request.method == 'POST':
+		otp = request.POST.get("otp")
+		if otp_obj.verify_token(int(otp)):
+			return redirect('/profile/')
+		else:
+			messages.error(request, 'Invalid OTP!')
+	return render(request,'app/otp.html')
+
 
 @transaction.atomic
 def createaccount(user):
@@ -33,7 +56,10 @@ def register(request):
 	if request.method == 'POST':
 		form = UserRegisterForm(request.POST)
 		if form.is_valid():
+			iv = random_hex(20)
 			user = form.save()
+			otp = OTP(iv=iv,user=user)
+			otp.save()
 			createaccount(user)
 			return render(request,'app/success.html')
 	else:
@@ -111,12 +137,14 @@ def updatebankbalance(account,amount):
 	account.balance-=amount
 	account.save()
 
+
 @require_POST
 @login_required
 def add_money(request):
 	if request.method == 'POST':
 		pin = request.POST.get("pin")
 		amount = float(request.POST.get("amount"))
+
 		try:
 			with transaction.atomic():
 				tx = Transaction()

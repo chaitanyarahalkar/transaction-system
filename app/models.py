@@ -55,6 +55,9 @@ class BankAdmin(admin.ModelAdmin):
 	readonly_fields = ('account_number','balance','user')
 	search_fields = ['account_number','bank']
 
+class OTP(models.Model):
+	user = models.OneToOneField(User,on_delete=models.CASCADE)
+	iv = models.BinaryField()
 
 
 class TransactionAdmin(admin.ModelAdmin):
