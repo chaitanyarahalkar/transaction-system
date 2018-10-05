@@ -25,6 +25,7 @@ urlpatterns = [
     url('invoice/',views.invoice,name='invoice'),
     url('transaction/',views.my_transaction,name='my_transaction'),
     url('transactions/',views.transactions,name='transactions'),
+    url('otp/',views.verifyotp,name='otp'),
     url('add_money/',views.add_money,name='add_money'),
     url('register/',views.register,name = 'register'),
     url('user/',views.user,name = 'user'),

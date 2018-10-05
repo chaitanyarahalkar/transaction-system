@@ -130,7 +130,7 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 AUTH_USER_MODEL = 'app.User'
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/otp/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
