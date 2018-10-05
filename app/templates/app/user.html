@@ -166,13 +166,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="bmd-label-floating">Fist Name</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="fname" value="{{ request.user.first_name }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="bmd-label-floating">Last Name</label>
-                                                    <input type="text" class="form-control">
+                                                    <input type="text" class="form-control" name="lname" value="{{ request.user.last_name }}">
                                                 </div>
                                             </div>
                                         </div>
