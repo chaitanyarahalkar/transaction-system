@@ -58,6 +58,10 @@ class BankAdmin(admin.ModelAdmin):
 class OTP(models.Model):
 	user = models.OneToOneField(User,on_delete=models.CASCADE)
 	iv = models.BinaryField()
+	verified = models.BooleanField(default=False)
+
+	def __str__(self):
+		return str(self.verified)
 
 
 class TransactionAdmin(admin.ModelAdmin):
