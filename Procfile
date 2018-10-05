@@ -1,2 +1,3 @@
-web: gunicorn dbmsl.wsgi
+web: gunicorn dbmsl.wsg
+heroku config:set DISABLE_COLLECTSTATIC=1
 
