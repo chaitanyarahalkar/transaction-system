@@ -15,15 +15,29 @@ from django.http import HttpResponse
 import csv
 from django_otp.util import random_hex
 from .otp import TOTPVerification
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth import views as auth_views
+
+
 
 # Create your views here.
 def index(request):
 	return render(request,'app/index.html')
 
+@transaction.atomic
+def setbool(request):
+	ob = OTP.objects.get(user=request.user)
+	ob.verified = True
+	ob.save()
+
+def otpcheck(user):
+	return OTP.objects.get(user=user).verified
 
 @transaction.atomic
 def getiv(request):
-	return OTP.objects.get(user=request.user).iv 
+	ob = OTP.objects.get(user=request.user)
+	ob.save()
+	return ob.iv
 
 def sendotp(request):
 	otp = TOTPVerification(key=getiv(request))
@@ -33,7 +47,9 @@ def sendotp(request):
 @login_required
 def verifyotp(request):
 	otp_obj = sendotp(request)
+	init_req = request
 	if request.method == 'POST':
+		setbool(init_req)
 		otp = request.POST.get("otp")
 		if otp_obj.verify_token(int(otp)):
 			return redirect('/profile/')
@@ -67,7 +83,7 @@ def register(request):
 
 	return render(request,'app/signup.html',{'form':form})
 
-
+@user_passes_test(otpcheck,login_url='/login/')
 @login_required
 def profile(request):
 	if request.user.is_authenticated:
@@ -190,3 +206,9 @@ def invoice(request):
 		writer.writerow([t.txn_id,t.to_id,t.issuer_bank,t.amount,t.paid_on])
 
 	return response
+
+def logout(request):
+	ob = OTP.objects.get(user=request.user)
+	ob.verified = False
+	ob.save()
+	return auth_views.LogoutView.as_view(template_name='app/logout.html')(request)
