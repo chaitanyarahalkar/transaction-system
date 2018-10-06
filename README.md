@@ -1,1 +1,1 @@
-# Transaction System
+# Transaction System in Django Framework
