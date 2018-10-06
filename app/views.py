@@ -11,6 +11,7 @@ import random
 import string  
 from django.views.decorators.http import require_POST
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 import csv
 from django_otp.util import random_hex
@@ -18,7 +19,7 @@ from .otp import TOTPVerification
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import views as auth_views
 
-
+banks = ['ICICI','HSBC','HDFC','Barclays','Punjab National','Bank of Baroda','Bank of Maharashtra','Axis']
 
 # Create your views here.
 def index(request):
@@ -64,6 +65,7 @@ def createaccount(user):
 		account = Bank()
 		account.account_number = ''.join(random.choices(string.digits, k=20))
 		account.user = user
+		account.bank = random.choice(banks)
 		account.save()
 	except IntegrityError:
 		createaccount(user)
@@ -83,7 +85,7 @@ def register(request):
 
 	return render(request,'app/signup.html',{'form':form})
 
-@user_passes_test(otpcheck,login_url='/login/')
+@user_passes_test(otpcheck,login_url='/login')
 @login_required
 def profile(request):
 	if request.user.is_authenticated:
@@ -115,28 +117,6 @@ def user(request):
 	return render(request,'app/user.html')
 
 
-
-@login_required
-def my_transaction(request):
-	if request.method == 'POST':
-		if user.is_active:
-			request.session.set_expiry(300)
-			if request.session.get_expiry_age() == 0: # need to add page 
-				render(request,'app/expired.html')
-			tx = Transaction()
-			upi_id = request.POST.get("toid")
-			try:
-				with transaction.atomic():
-					if int(upi_id) == request.user.upi:
-						pass
-			except IntegrityError:
-				messages.error(request,'Error in transaction performing!')
-
-			transaction.on_commit(send_message)
-
-		
-	return HttpResponse('<h3>done</h3>')
-
 @login_required
 def transactions(request):
 	transactions = Transaction.objects.filter(from_id=request.user.username)
@@ -153,8 +133,12 @@ def getbalance(request):
 	return account
 
 @transaction.atomic 
-def updatebankbalance(account,amount):
-	account.balance-=amount
+def updatebankbalance(account,amount,sign):
+	if sign == "-":
+		account.balance-=amount
+	elif sign == "+":
+		account.balance+=amount
+	
 	account.save()
 
 
@@ -174,7 +158,7 @@ def add_money(request):
 				if balance > amount:
 					if pin == request.user.upi_pin:
 						updatebalance(request,amount)
-						updatebankbalance(account,amount)
+						updatebankbalance(account,amount,"-")
 						tx.amount = amount
 						tx.txn_id = int(time.time())
 						request.user.save()
@@ -193,6 +177,53 @@ def add_money(request):
 
 	return redirect('/profile/')
 
+@transaction.atomic
+def queryuser(username):
+	try:
+		user = User.objects.get(username=username)
+		return Bank.objects.get(user=user)
+	except ObjectDoesNotExist:
+		return None 
+
+	
+
+
+@login_required
+def money_transfer(request):
+	if request.method == 'POST':
+		amount = float(request.POST.get("amount"))
+		pin = request.POST.get("pin")
+		tx = Transaction()
+		tx.from_id = request.user.username 
+		tx.to_id = request.POST.get("id")
+		tx.amount = amount
+		try:
+			account = getbalance(request)
+			balance,tx.issuer_bank = account.balance,account.bank 
+			recv_account = queryuser(tx.to_id)
+			if recv_account is not None:
+				if balance > amount:
+					if pin == request.user.upi_pin:
+						updatebankbalance(account,amount,"-")
+						updatebankbalance(recv_account,amount,"+")
+						tx.txn_id = int(time.time())
+						tx.save()
+						messages.info(request,'Transferred {} to {} '.format(amount,tx.to_id))
+					else:
+						messages.warning(request,'Invalid PIN!')
+				else:
+					messages.warning(request,'Insufficient balance!')
+			else:
+				messages.warning(request,'Invalid ID!')
+		except IntegrityError:
+			messages.error(request,'Error in performing transaction!')
+
+	return redirect('/profile/')
+
+
+
+
+
 
 @login_required
 def invoice(request):
@@ -207,6 +238,7 @@ def invoice(request):
 
 	return response
 
+@login_required
 def logout(request):
 	ob = OTP.objects.get(user=request.user)
 	ob.verified = False

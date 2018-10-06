@@ -188,22 +188,23 @@
                                         </div>
                                         <div class="col-xl-9 col-sm-12">
                                             <div class="row">
-                                                <form class="navbar-form">
+                                                <form class="navbar-form" method="POST" action="/transfer/">
+                                                    {% csrf_token %}
                                                     <div class="input-group no-border">
                                                         <div class="row">
                                                             <div class="col-xl-12">
                                                                 <input type="text" value="" class="form-control" placeholder="Enter Payee Mobile No. ..">
                                                             </div>
                                                             <div class="col-xl-12">
-                                                                <input type="text" value="" class="form-control" placeholder="Amount Rs. ..">
+                                                                <input type="text" value="" class="form-control" pattern="^[1-9]\d*(\.\d+)?$" name="amount" placeholder="Amount Rs. ..">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-xl-12">
-                                                                <input type="text" value="" class="form-control" placeholder="Enter UPI id ..">
+                                                                <input type="text" value="" class="form-control" name="id" placeholder="Enter UPI id ..">
                                                             </div>
                                                             <div class="col-xl-12" style="float: right">
-                                                                <input type="text" value="" class="form-control" placeholder="Pin ..">
+                                                                <input type="text" value="" class="form-control" name="pin" placeholder="Pin ..">
                                                             </div>
 
                                                             <div class="col-xl-12">
