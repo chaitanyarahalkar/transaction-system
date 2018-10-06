@@ -22,8 +22,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^$',views.index,name='index'),
     url('admin/', admin.site.urls),
+    url('transfer/',views.money_transfer,name='transfer'),
     url('invoice/',views.invoice,name='invoice'),
-    url('transaction/',views.my_transaction,name='my_transaction'),
     url('transactions/',views.transactions,name='transactions'),
     url('otp/',views.verifyotp,name='otp'),
     url('add_money/',views.add_money,name='add_money'),
