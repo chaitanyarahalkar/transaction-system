@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 from .models import Transaction,User,Bank,OTP 
 from django.db import transaction,IntegrityError
-from django.contrib import messages
 import time 
 import random
 import string  
@@ -18,8 +17,13 @@ from django_otp.util import random_hex
 from .otp import TOTPVerification
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import views as auth_views
+import dbmsl.settings as settings 
 
 banks = ['ICICI','HSBC','HDFC','Barclays','Punjab National','Bank of Baroda','Bank of Maharashtra','Axis']
+
+
+from django.core.mail import send_mail
+
 
 # Create your views here.
 def index(request):
@@ -42,7 +46,9 @@ def getiv(request):
 
 def sendotp(request):
 	otp = TOTPVerification(key=getiv(request))
-	print(otp.generate_token())
+	code = otp.generate_token()
+	print(code)
+	send_mail('OTP to login to SCGPay',f'{code} is your OTP to login',settings.EMAIL_HOST_USER,[request.user.email],fail_silently=False)
 	return otp 
 
 @login_required
@@ -79,6 +85,7 @@ def register(request):
 			otp = OTP(iv=iv,user=user)
 			otp.save()
 			createaccount(user)
+			send_mail('Welcome to SCGPay',f'Hi {user.username}, \n Welcome you to SCGPay! ',settings.EMAIL_HOST_USER,[user.email],fail_silently=False)
 			return render(request,'app/success.html')
 	else:
 		form = UserRegisterForm()
@@ -124,6 +131,7 @@ def transactions(request):
 
 @transaction.atomic
 def updatebalance(request,amount):
+	send_mail('Transaction alert for your account',f'{amount} has been added to your wallet. The available balance in your wallet is {request.user.wallet_balance + amount }.',settings.EMAIL_HOST_USER,[request.user.email],fail_silently=False)
 	request.user.wallet_balance+=amount
 
 
@@ -208,7 +216,7 @@ def money_transfer(request):
 						updatebankbalance(recv_account,amount,"+")
 						tx.txn_id = int(time.time())
 						tx.save()
-						messages.info(request,'Transferred {} to {} '.format(amount,tx.to_id))
+						messages.info(request,f'Transferred {amount} to {tx.to_id}')
 					else:
 						messages.warning(request,'Invalid PIN!')
 				else:
@@ -219,9 +227,6 @@ def money_transfer(request):
 			messages.error(request,'Error in performing transaction!')
 
 	return redirect('/profile/')
-
-
-
 
 
 
