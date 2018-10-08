@@ -4,7 +4,7 @@ import time
 
 class TOTPVerification:
 
-    def __init__(self,key):
+    def __init__(self, key):
         # secret key that will be used to generate a token,
         # User can provide a custom value to the key.
         self.key = key
@@ -68,4 +68,3 @@ class TOTPVerification:
 #         print("Generated token is: ", generated_token)
 #         token = int(input("Enter token: "))
 #         print(phone1.verify_token(token))
-    
