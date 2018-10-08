@@ -1,38 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+  <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>OTP Verification</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
-<body>
-
-
-	<div class="container">
-		{% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {{ message }}
-                    </div>
-          {% endfor %}
-		<form class="form-inline" method="POST">
-			{% csrf_token %}
-  <div class="form-group mb-2">
-    <label for="phone" class="sr-only">Phone</label>
-    <input type="text" readonly class="form-control-plaintext" id="phone" value="{{ request.user.contact }}">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    {% load static %}
+    <link href="{% static 'app/css/material-dashboard.css' %}" rel="stylesheet" />
+<body class="dark-edition">
+  <div class="wrapper ">
+  	<div class="row">
+      <
+      <div class="col-xl-12 col-sm-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">OTP Verification</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+		          {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{ message }}
+                </div>
+                {% endfor %}
+              </div>
+                <div class="row">
+		            <form class="form-inline" method="POST">
+			           {% csrf_token %}
+                  <div class="form-group mb-2">
+                    <label for="phone" class="sr-only">Phone</label>
+                    <input type="text" readonly class="form-control-plaintext text-white" id="phone" value="{{ request.user.contact }}">
+                  </div>
+                  <div class="form-group mx-sm-3 mb-2">
+                    <label for="otp" class="sr-only">OTP</label>
+                    <input type="password" class="form-control" id="otp" name="otp" placeholder="OTP">
+                  </div>
+                  <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+                </form>
+	          </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group mx-sm-3 mb-2">
-    <label for="otp" class="sr-only">OTP</label>
-    <input type="password" class="form-control" id="otp" name="otp" placeholder="OTP">
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-</form>
-	</div>
 
+{% load static %}
+    <script src="{% static 'app/js/core/jquery.min.js' %}"></script>
+    <script src="{% static 'app/js/core/popper.min.js'  %}"></script>
+    <script src="{% static 'app/js/core/bootstrap-material-design.min.js'  %}"></script>
+    <script src="https://unpkg.com/default-passive-events"></script>
+    <script src="{% static 'app/js/plugins/perfect-scrollbar.jquery.min.js'  %}"></script>
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chartist JS -->
+    <script src="{% static 'app/js/plugins/chartist.min.js'  %}"></script>
+    <!--  Notifications Plugin    -->
+    <script src="{% static 'app/js/plugins/bootstrap-notify.js'  %}"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="{% static 'app/js/material-dashboard.js'  %}"></script>
 
 </body>
 </html>

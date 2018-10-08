@@ -8,7 +8,6 @@ from django.http import HttpResponse
 from django.db.models import Max,Count,Avg
 from django.contrib import messages
 from import_export.admin import ImportExportActionModelAdmin
-import uuid
 # Create your models here.
 
 

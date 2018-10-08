@@ -8,6 +8,7 @@ from django.db import transaction,IntegrityError
 import time 
 import random
 import string  
+from django.views.decorators.gzip import gzip_page
 from django.views.decorators.http import require_POST
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
@@ -26,6 +27,7 @@ from django.core.mail import send_mail
 
 
 # Create your views here.
+@gzip_page
 def index(request):
 	return render(request,'app/index.html')
 
@@ -94,6 +96,7 @@ def register(request):
 
 @user_passes_test(otpcheck,login_url='/login')
 @login_required
+@gzip_page
 def profile(request):
 	if request.user.is_authenticated:
 		if request.user.is_active:
