@@ -1,0 +1,31 @@
+# HTTP Cookie File downloaded with cookies.txt by Genuinous @genuinous
+# This file can be used by wget, curl, aria2c and other standard compliant tools.
+# Usage Examples:
+#   1) wget -x --load-cookies cookies.txt "https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"
+#   2) curl --cookie cookies.txt "https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"
+#   3) aria2c --load-cookies cookies.txt "https://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html"
+#
+www.oracle.com	FALSE	/technetwork/database/database-technologies/express-edition/downloads	FALSE	0	testSessionCookie	Enabled
+.oracle.com	TRUE	/	FALSE	1708708518	s_fid	35AE402C48495011-207FB62EF90B4DAF
+.oracle.com	TRUE	/	FALSE	1603026031	ELOQUA	GUID=A005CD12244F4FBAA9513C3E1DE85BA6
+.oracle.com	TRUE	/	FALSE	1571403656	_abck	9D945679B2EA66C9263F87FBCC7A6C1D75EFF058686E0000FF83C85BFEC8FC3D~0~bxuKl/7bt43pvXonS0WwtO6hQQ00x/g5afwd8jReDAk=~-1~-1
+.oracle.com	TRUE	/	FALSE	1558717883	ORA_UCM_INFO	3~6B6CE4178B2CD9B2E050E60AD27F5325~Chaitanya~Rahalkar~chaitanyarahalkar4@gmail.com
+docs.oracle.com	FALSE	/	FALSE	1574419154	__atuvc	2%7C43
+.oracle.com	TRUE	/	FALSE	1558717883	ORA_WWW_PERSONALIZE	v:1~i:NOT_FOUND~r:WM148020~g:APAC~l:en~cs:WM148065~cn:Chaitanya Rahalkar INC.
+.oracle.com	TRUE	/	FALSE	1558717883	ORA_WWW_MRKT	v:1~g:6B6CE4178B2CD9B2E050E60AD27F5325~t:NOT_FOUND~c:MP05
+.oracle.com	TRUE	/	FALSE	2145916800	atgRecVisitorId	13D3kiKZHUAMlJJaXZ0LIW5ufNMVGynhMF7qO3kgJ2XVfLI82A5
+www.oracle.com	FALSE	/	FALSE	0	ORA_WWW_ABMDATA	{&quot;loaded&quot;:&quot;loaded&quot;,&quot;data&quot;:[{&quot;campaignId&quot;:280341,&quot;categories&quot;:[773965,773457]}],&quot;bkId&quot;:&quot;jxJPJ9uM99eI03+q&quot;}
+.oracle.com	TRUE	/	FALSE	0	s_cc	true
+.oracle.com	TRUE	/	FALSE	0	xdVisitorId	13D3kiKZHUAMlJJaXZ0LIW5ufNMVGynhMF7qO3kgJ2XVfLI82A5
+www.oracle.com	FALSE	/	FALSE	0	JSESSIONID	fhsbPjjlhs4kjT7NHyI2SCwitpU_F2rSkGIUbGd8LpMwoHbUjXvn!1590968514!116043330
+login.oracle.com	FALSE	/	TRUE	0	login-ext-prod_iper	993564572.24862.0000
+.oracle.com	TRUE	/	FALSE	1582477883	ORASSO_AUTH_HINT	v1.0~20190224011122
+login.oracle.com	FALSE	/	TRUE	0	OAM_ID	VERSION_4~X2uRXICaijmCh4npsy4hlQ==~nEtyhQoSA3XbTomkgMdGa9eUcqbWSNw09VZnqjY/b0E3RF8grdFwbNceL1w2BeAKuuYtWHOGoPAjP5hgQ+h3grxLcYnYS5dJNt8jG9anv9AxgIDTcAKjX+mZ9PYjl6wH2O20a6bjoINngELiCZycUFl8oPlFDKHuvREwd3e10P7uzp11X3rkfDC7zrN99/CNhyJfe50FQ6/FrAw0ur4/n1jqrNqzXr4shlkHjSqHnqfTzypSFyUcpk9QLqWSQ4un9y2rh6sIBBi128OrKtcHM2qv6aBptOoTwjGgc/Be8AMnYF4gXeRBAX08USbubWsRg5AN5zqrZsm0oMZDG0e99Q==
+edelivery.oracle.com	FALSE	/	FALSE	0	OHS-edelivery.oracle.com-443	5BE06D40F9D928AD4E805BBD1DE7EACD2B108043E0DDA9A2E0A783B2A665DED94779840FEE28EB8F6201A5EA8F40339677A6488F7E807F658B497A19D14ED43B18A9D45C7F689A7AC8F64B88AD2040B465F72E8E21251A34531397F7EF558C4DA0387FFEAEA12FBD0A1DC7DD3879CACB928BF4CA9BFE3F213AAB7D9D3D1CDF081BE99092D09C285F01BE30CC7753DE02EF1C1541BCC18F50F0BFCA4E4FFEF6356419BB2C7CE03F5C2CD18FD001AC6C9366A23A115FD05437BE629AABDFC89E9B2E3A3ABFBA954C2A20239B069633C11725E4D33DA32A738D63409CB34E2F7EDB71C9A7BA8A6C6AE5B781426E9E9D5C113B1FBEF8241DA70DB2DECE3CE31B8F78C038FC027E252601~
+login.oracle.com	FALSE	/	FALSE	0	OAM_JSESSIONID	yO0bWBfYfUJhAM_RQtlsM-jGcVwi8uZyaBut-7JWKG-NGN7DbANf!-130630278
+.oracle.com	TRUE	/	FALSE	0	atgRecSessionId	UbEbWXNRR_7ddhz9HgDZsv9oHmMm_dGiCwpAVtuUs38MWwuKPbZ5!-730837272!159907690
+.oracle.com	TRUE	/	FALSE	1550943918	gpw_e24	https%3A%2F%2Fwww.oracle.com%2Ftechnetwork%2Fdatabase%2Fdatabase-technologies%2Fexpress-edition%2Fdownloads%2Findex.html
+.oracle.com	TRUE	/	FALSE	1550943850	oraclelicense	accept-appex3-cookie
+.oracle.com	TRUE	/	FALSE	1553534118	s_nr	1550942118400-Repeat
+.oracle.com	TRUE	/	FALSE	0	s_sq	%5B%5BB%5D%5D
+.oracle.com	TRUE	/	FALSE	1551547376	RT	&quot;sl=0&amp;ss=1550940258957&amp;tt=0&amp;obo=0&amp;sh=1550942040136%3D4%3A0%3A24566%2C1550940303368%3D3%3A0%3A19464%2C1550940261970%3D2%3A0%3A14853%2C1550940236086%3D1%3A0%3A8327&amp;dm=oracle.com&amp;si=36655133-27ab-4f89-8afa-f18f27c4241e&amp;bcn=%2F%2F1288af19.akstat.io%2F&quot;
