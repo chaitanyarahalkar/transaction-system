@@ -58,4 +58,3 @@ Copyright © 2019 [Chaitanya Rahalkar](https://github.com/chaitanyarahalkar).<br
 This project is [MIT](https://github.com/chaitanyarahalkar/transaction-system/blob/master/LICENSE) licensed.
 
 ***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
