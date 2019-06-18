@@ -31,12 +31,6 @@ python install -r requirements.txt
 python manage.py runserver
 ```
 
-## Run tests
-
-```sh
-npm run test
-```
-
 ## Author
 
 👤 **Chaitanya Rahalkar**
