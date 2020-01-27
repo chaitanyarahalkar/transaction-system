@@ -33,7 +33,7 @@ Set the environment variables by editing the .bashrc file on Linux / MacOS by ru
 ```sh
 
 echo "export SECRET_KEY=the_chosen_key" >> ~/.bashrc
-echo "export EMAIL_HOST_USER=john.doe@example.com >> ~/.bashrc
+echo "export EMAIL_HOST_USER=john.doe@example.com" >> ~/.bashrc
 echo "export EMAIL_HOST_PASSWORD=foobar" >> ~/.bashrc
 ```
 
