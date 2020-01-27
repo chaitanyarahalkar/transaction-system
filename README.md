@@ -25,6 +25,20 @@
 python install -r requirements.txt
 ```
 
+## Configure the Settings
+
+Setup SMTP Servers. By default the server is set to smtp.gmail.com. Add the environment variables EMAIL_HOST_USER, EMAIL_HOST_PASSWORD and SECRET_KEY to the .bashrc. Django uses a secret key (the SECRET_KEY environment variable) as a seed value to generate session identifiers. A secure random secret key can be generated using [this](https://djecrety.ir/). 
+Set the environment variables by editing the .bashrc file on Linux / MacOS by running - 
+
+```sh
+
+echo "export SECRET_KEY=the_chosen_key" >> ~/.bashrc
+echo "export EMAIL_HOST_USER=john.doe@example.com >> ~/.bashrc
+echo "export EMAIL_HOST_PASSWORD=foobar" >> ~/.bashrc
+```
+
+If a Gmail account is to be used for sending transaction emails and OTP notifications, the less-secure-apps switch needs to be turned on for the account. This can be enabled [here](https://myaccount.google.com/lesssecureapps).
+
 ## Usage
 
 ```sh
